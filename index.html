@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BUGRI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:#000;
+  color:#ffd800;
+  font-family:Arial,sans-serif;
+}
+
+/* SECTION */
+.section{
+  position:relative;
+  width:100%;
+  height:100vh;
+  overflow:hidden;
+}
+
+/* VIDEO */
+video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-2;
+}
+
+/* OVERLAY */
+.overlay{
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle, rgba(120,0,160,.25), rgba(0,0,0,.85));
+  z-index:-1;
+}
+
+/* CENTER */
+.center{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  text-align:center;
+}
+
+/* TITLE */
+h1{
+  font-size:clamp(44px,9vw,96px);
+  margin-bottom:20px;
+  animation:glow 3s infinite;
+}
+
+/* COUNTDOWN */
+.countdown{
+  display:flex;
+  gap:16px;
+  justify-content:center;
+}
+.box{
+  min-width:95px;
+  padding:16px 12px;
+  border-radius:14px;
+  background:rgba(90,0,140,.65);
+  border:1px solid rgba(255,216,0,.6);
+  backdrop-filter:blur(6px);
+}
+.number{
+  font-size:clamp(30px,5vw,50px);
+}
+.label{
+  font-size:11px;
+  opacity:.8;
+}
+
+/* TRACKLIST SECTION */
+.track-section{
+  position:relative;
+  height:100vh;
+  background:#050008;
+  overflow:hidden;
+}
+
+.track{
+  position:absolute;
+  font-size:clamp(14px,2vw,20px);
+  opacity:.8;
+  animation:blink 2.5s infinite;
+  white-space:nowrap;
+}
+
+/* BLINK */
+@keyframes blink{
+  0%{opacity:.2}
+  50%{opacity:1}
+  100%{opacity:.2}
+}
+
+/* GLOW */
+@keyframes glow{
+  0%,100%{text-shadow:0 0 15px #ffd800,0 0 40px #ffb000}
+  50%{text-shadow:0 0 30px #ffd800,0 0 80px #ff8c00}
+}
+
+/* MOBILE */
+@media(max-width:600px){
+  .box{min-width:75px}
+}
+</style>
+</head>
+
+<body>
+
+<!-- VIDEO 1 -->
+<section class="section">
+  <video autoplay muted loop playsinline>
+    <source src="background.mp4" type="video/mp4">
+  </video>
+  <div class="overlay"></div>
+
+  <div class="center">
+    <h1>BUGRI</h1>
+    <div class="countdown">
+      <div class="box"><div class="number" id="days">00</div><div class="label">DAYS</div></div>
+      <div class="box"><div class="number" id="hours">00</div><div class="label">HOURS</div></div>
+      <div class="box"><div class="number" id="minutes">00</div><div class="label">MINUTES</div></div>
+      <div class="box"><div class="number" id="seconds">00</div><div class="label">SECONDS</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO 2 -->
+<section class="section">
+  <video autoplay muted loop playsinline>
+    <source src="background.mp4" type="video/mp4">
+  </video>
+  <div class="overlay"></div>
+</section>
+
+<!-- TRACKLIST -->
+<section class="track-section">
+  <div class="track" style="top:8%;left:12%;">1. Discover (Intro 1)</div>
+  <div class="track" style="top:16%;left:62%;">2. The Evolving Experimental Journey</div>
+  <div class="track" style="top:28%;left:78%;">3. Every Branch Has Its Own Deep</div>
+  <div class="track" style="top:42%;left:66%;">4. Worthless Inspiration Attacks</div>
+  <div class="track" style="top:58%;left:74%;">5. 15–18 Drama-Concrete</div>
+  <div class="track" style="top:70%;left:54%;">6. Safe Place</div>
+  <div class="track" style="top:78%;left:28%;">7. House Roots</div>
+  <div class="track" style="top:62%;left:8%;">8. Before Break</div>
+  <div class="track" style="top:46%;left:14%;">9. Clean Breaker</div>
+  <div class="track" style="top:30%;left:22%;">10. Personalized Black Hole Server</div>
+  <div class="track" style="top:18%;left:34%;">11. Childhood 1</div>
+  <div class="track" style="top:26%;left:48%;">12. Childhood 2</div>
+  <div class="track" style="top:38%;left:52%;">13. Childhood 3</div>
+  <div class="track" style="top:52%;left:46%;">14. Childhood 4</div>
+  <div class="track" style="top:66%;left:36%;">15. Roots Are Turning Back</div>
+  <div class="track" style="top:84%;left:42%;">16. Bugri</div>
+</section>
+
+<script>
+const target = new Date("2026-05-26T00:00:00").getTime();
+setInterval(()=>{
+  const d = target - Date.now();
+  if(d<=0)return;
+  days.textContent=Math.floor(d/86400000);
+  hours.textContent=Math.floor(d/3600000)%24;
+  minutes.textContent=Math.floor(d/60000)%60;
+  seconds.textContent=Math.floor(d/1000)%60;
+},1000);
+</script>
+
+</body>
+</html>
